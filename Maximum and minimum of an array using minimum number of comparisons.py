@@ -46,4 +46,60 @@ if __name__ == "__main__":
 #  Time Complexity: O(n)
 
 
+
 # METHOD 2 (Tournament Method)
+"""
+Divide the array into two parts and compare the maximums and minimums of the two parts to get the maximum and the minimum of the whole array.
+
+Pair MaxMin(array, array_size)
+   if array_size = 1
+      return element as both max and min
+   else if arry_size = 2
+      one comparison to determine max and min
+      return that pair
+   else    /* array_size  > 2 */
+      recur for max and min of left half
+      recur for max and min of right half
+      one comparison determines true max of the two candidates
+      one comparison determines true min of the two candidates
+      return
+"""
+
+
+def getMinMax(low, high, arr):
+    arr_min = arr[low]
+    arr_max = arr[high]
+
+    # if there is one element
+    if low == high:
+        arr_max = arr[low]
+        arr_min = arr[high]
+        return (arr_min, arr_max)
+
+    # if there is two element
+    if low + 1 == high:
+        if arr[low] > arr[high]:
+            arr_max = arr[low]
+            arr_min = arr[high]
+        else:
+            arr_min = arr[low]
+            arr_max = arr[high]
+        return (arr_min, arr_max)
+
+    else:
+        mid = int((low + high) / 2)
+        arr_min1, arr_max1 = getMinMax(low, mid, arr)
+        arr_min2, arr_max2 = getMinMax(mid + 1, high, arr)
+    return (min(arr_min1, arr_min2), max(arr_max1, arr_max2))
+
+
+arr = [1000, 11, 445, 1, 330, 3000]
+high = len(arr) - 1
+low = 0
+arr_min, arr_max = getMinMax(low, high, arr)
+print('Minimum element is ', arr_min)
+print('nMaximum element is ', arr_max)
+
+# Time Complexity: O(n)
+
+
