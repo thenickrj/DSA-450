@@ -45,3 +45,5 @@ if __name__ == "__main__":
 
 #  Time Complexity: O(n)
 
+
+# METHOD 2 (Tournament Method)
