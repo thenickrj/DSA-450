@@ -103,3 +103,39 @@ print('nMaximum element is ', arr_max)
 # Time Complexity: O(n)
 
 
+# METHOD 3 (Compare in Pairs)
+
+"""
+If n is odd then initialize min and max as first element. 
+If n is even then initialize min and max as minimum and maximum of the first two elements respectively. 
+For rest of the elements, pick them in pairs and compare their 
+maximum and minimum with max and min respectively. 
+"""
+
+
+def getMinMax(arr, n):
+    minV = maxV = 0
+    if n % 2 == 0:
+        minV = min(arr[0], arr[1])
+        maxV = max(arr[0], arr[1])
+    else:
+        minV = maxV = arr[0]
+
+    i = 1
+    while (i < n):
+        if (arr[i] < arr[i + 1]):
+            maxV = max(maxV, arr[i + 1])
+            minV = min(minV, arr[i])
+        else:
+            maxV = max(maxV, arr[i])
+            minV = min(minV, arr[i + 1])
+        i = i + 2
+    return (minV, maxV)
+
+
+arr = [5, 7, 9, 11, 14, 2, 3]
+minV, maxV = getMinMax(arr, len(arr))
+print(minV)
+print(maxV)
+
+# Time Complexity: O(n)
